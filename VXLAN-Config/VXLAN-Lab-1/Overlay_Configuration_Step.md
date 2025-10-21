@@ -1,6 +1,6 @@
 VXLAN Lab-1
 ============================================
-Overlay Configuration Step 1:L2 Multitenancy
+Overlay Configuration Step 1: L2 Multitenancy
 ============================================
 Spine1
 ======
@@ -289,7 +289,7 @@ Vlan 3
  name T1-V3
  vn-segment 1003
 ```
-Overlay Configuration Step 2:L3 Multitenancy
+Overlay Configuration Step 2: L3 Multitenancy
 ============================================
 Spine1
 ======
