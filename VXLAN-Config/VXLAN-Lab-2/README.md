@@ -568,6 +568,150 @@ neighbor 192.168.1.6
  inherit peer VXLAN-FEAF
  exit
 ```
+##### Leaf-1
+```Python
+feature bgp
+feature fabric forwarding
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+router bgp 64520
+ log-neighbor-changes 
+ router-id 3.3.3.3
+ address-family ipv4 unicast 
+  exit
+ address-family l2vpn evpn 
+  exit 
+ template peer VXLAN-SPINE
+  remote-as 64520
+  update-source loopback 0
+  address-family ipv4 unicast 
+  send-community 
+  send-community Extended 
+  soft-reconfiguration inbound 
+  exit
+ address-family l2vpn evpn 
+  send-community 
+  send-community extended
+   exit
+  exit
+neighbor 192.168.1.1
+ inherit peer VXLAN-SPINE
+ exit
+neighbor 192.168.1.2
+ inherit peer VXLAN-SPINE
+ exit
+```
+##### Leaf-2
+```Python
+feature bgp
+feature fabric forwarding
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+router bgp 64520
+ log-neighbor-changes 
+ router-id 4.4.4.4
+ address-family ipv4 unicast 
+  exit
+ address-family l2vpn evpn 
+  exit 
+ template peer VXLAN-SPINE
+  remote-as 64520
+  update-source loopback 0
+  address-family ipv4 unicast 
+  send-community 
+  send-community Extended 
+  soft-reconfiguration inbound 
+  exit
+ address-family l2vpn evpn 
+  send-community 
+  send-community extended
+   exit
+  exit
+neighbor 192.168.1.1
+ inherit peer VXLAN-SPINE
+ exit
+neighbor 192.168.1.2
+ inherit peer VXLAN-SPINE
+ exit
+```
+##### Leaf-3
+```Python
+feature bgp
+feature fabric forwarding
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+router bgp 64520
+ log-neighbor-changes 
+ router-id 5.5.5.5
+ address-family ipv4 unicast 
+  exit
+ address-family l2vpn evpn 
+  exit 
+ template peer VXLAN-SPINE
+  remote-as 64520
+  update-source loopback 0
+  address-family ipv4 unicast 
+  send-community 
+  send-community Extended 
+  soft-reconfiguration inbound 
+  exit
+ address-family l2vpn evpn 
+  send-community 
+  send-community extended
+   exit
+  exit
+neighbor 192.168.1.1
+ inherit peer VXLAN-SPINE
+ exit
+neighbor 192.168.1.2
+ inherit peer VXLAN-SPINE
+ exit
+```
+##### Leaf-4
+```Python
+feature bgp
+feature fabric forwarding
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+router bgp 64520
+ log-neighbor-changes 
+ router-id 6.6.6.6
+ address-family ipv4 unicast 
+  exit
+ address-family l2vpn evpn 
+  exit 
+ template peer VXLAN-SPINE
+  remote-as 64520
+  update-source loopback 0
+  address-family ipv4 unicast 
+  send-community 
+  send-community Extended 
+  soft-reconfiguration inbound 
+  exit
+ address-family l2vpn evpn 
+  send-community 
+  send-community extended
+   exit
+  exit
+neighbor 192.168.1.1
+ inherit peer VXLAN-SPINE
+ exit
+neighbor 192.168.1.2
+ inherit peer VXLAN-SPINE
+ exit
+```
 ## 4. VLANs & VNIs
 ## 5. AnyCast G/W
 ## 6. EVPN
