@@ -262,6 +262,20 @@ ip pim ssm range 232.0.0.0/8
 ip pim anycast-rp 1.2.3.4 192.168.1.1
 ip pim anycast-rp 1.2.3.4 192.168.1.2
 ```
+##### Note: Exact Same Config for all the Leafs
+```python
+
+feature pim 
+ip pim rp-address 1.2.3.4 group-list 224.0.0.0/4
+ip pim ssm range 232.0.0.0/8
+int loopback 0
+ ip pim sparse-mode 
+int e1/1-2
+ ip pim sparse-mode 
+
+```
+
+
 ## 3. Overlay
 ## 4. VLANs & VNIs
 ## 5. AnyCast G/W
