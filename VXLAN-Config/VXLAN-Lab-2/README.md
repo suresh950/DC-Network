@@ -6,6 +6,7 @@
 
 #### Configure the interface for all the switch Spine and Leaf, same config for all
 ##### Spine-1
+
 ```python
 int e1/1-4
  no switchport 
@@ -1032,6 +1033,9 @@ int vlan 30
  no shut
 ````
 ## Final Verification 
+```python
+! # now inter-VLAN communication is established 
+```
 ```python
 Leaf-4# show nve vni
 Codes: CP - Control Plane        DP - Data Plane          
