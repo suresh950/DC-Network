@@ -31,7 +31,7 @@ int loopback 0
 ```
 ##### Leaf-1
 ```python
-int e1/1-4
+int e1/1-2
  no switchport 
  no shut 
  mtu 9216
@@ -43,7 +43,7 @@ int loopback 0
 ```
 ##### Leaf-2
 ```python
-int e1/1-4
+int e1/1-2
  no switchport 
  no shut 
  mtu 9216
@@ -55,7 +55,7 @@ int loopback 0
 ```
 ##### Leaf-3
 ```python
-int e1/1-4
+int e1/1-2
  no switchport 
  no shut 
  mtu 9216
@@ -67,7 +67,7 @@ int loopback 0
 ```
 ##### Leaf-4
 ```python
-int e1/1-4
+int e1/1-2
  no switchport 
  no shut 
  mtu 9216
