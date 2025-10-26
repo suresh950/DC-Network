@@ -478,7 +478,52 @@ Slot     FIB State
    1        ACTIVE 
 Leaf-4#
 ```
-## 3. Overlay
+## 4. Step 4. Overlay BGP Configuration
+##### Spine-1
+```Python
+feature bgp
+feature fabric forwarding
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+nv overlay evpn
+
+router bgp 64520
+ log-neighbor-changes 
+ router-id 1.1.1.1
+ address-family ipv4 unicast 
+  exit
+ address-family l2vpn evpn 
+ retain route-target all 
+  exit 
+ template peer VXLAN-FEAF
+  remote-as 64520
+  update-source loopback 0
+  address-family ipv4 unicast 
+  send-community 
+  send-community Extended 
+  soft-reconfiguration inbound 
+  exit
+ address-family l2vpn evpn 
+  send-community 
+  send-community extended
+  route-reflector-client 
+   exit
+  exit
+neighbor 192.168.1.3
+ inherit peer VXLAN-FEAF
+ exit
+neighbor 192.168.1.4
+ inherit peer VXLAN-FEAF
+ exit
+neighbor 192.168.1.5
+ inherit peer VXLAN-FEAF
+ exit
+neighbor 192.168.1.6
+ inherit peer VXLAN-FEAF
+ exit
+
+```
 ## 4. VLANs & VNIs
 ## 5. AnyCast G/W
 ## 6. EVPN
