@@ -725,7 +725,98 @@ neighbor 192.168.1.2
  inherit peer VXLAN-SPINE
  exit
 ```
-## 4. VLANs & VNIs
+## (Quick BGP Checks)
+##### For all the Switch (Spine, Leaf)
+```python
+SPine-1(config-if)# show ip bgp summary
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 1.1.1.1, local AS number 64520
+BGP table version is 6, IPv4 Unicast config peers 4, capable peers 4
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.3     4 64520      20      20        6    0    0 00:11:20 0         
+192.168.1.4     4 64520      20      20        6    0    0 00:11:17 0         
+192.168.1.5     4 64520      20      20        6    0    0 00:11:43 0         
+192.168.1.6     4 64520      20      20        6    0    0 00:11:32 0         
+
+SPine-1(config-if)# 
+SPine-1(config-if)#
+
+Spine-2(config-if)# show ip bgp summary 
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 2.2.2.2, local AS number 64520
+BGP table version is 6, IPv4 Unicast config peers 4, capable peers 4
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.3     4 64520      23      23        6    0    0 00:14:11 0         
+192.168.1.4     4 64520      22      22        6    0    0 00:13:26 0         
+192.168.1.5     4 64520      23      23        6    0    0 00:14:13 0         
+192.168.1.6     4 64520      23      23        6    0    0 00:14:02 0         
+Spine-2(config-if)# 
+
+Leaf-1(config-if)# show ip bgp summary
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 3.3.3.3, local AS number 64520
+BGP table version is 4, IPv4 Unicast config peers 2, capable peers 2
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.1     4 64520      20      20        4    0    0 00:11:20 0         
+192.168.1.2     4 64520      20      20        4    0    0 00:11:24 0         
+Leaf-1(config-if)# 
+Leaf-1(config-if)#
+
+Leaf-2(config-if)# show ip bgp summary
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 4.4.4.4, local AS number 64520
+BGP table version is 4, IPv4 Unicast config peers 2, capable peers 2
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.1     4 64520      20      20        4    0    0 00:11:17 0         
+192.168.1.2     4 64520      19      19        4    0    0 00:10:39 0         
+Leaf-2(config-if)# 
+Leaf-2(config-if)#
+
+Leaf-3(config-if)# 
+Leaf-3(config-if)# show ip bgp summary
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 5.5.5.5, local AS number 64520
+BGP table version is 4, IPv4 Unicast config peers 2, capable peers 2
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.1     4 64520      20      20        4    0    0 00:11:43 0         
+192.168.1.2     4 64520      20      20        4    0    0 00:11:26 0         
+Leaf-3(config-if)# 
+Leaf-3(config-if)#
+
+Leaf-4(config-if)# show ip bgp summary
+BGP summary information for VRF default, address family IPv4 Unicast
+BGP router identifier 6.6.6.6, local AS number 64520
+BGP table version is 4, IPv4 Unicast config peers 2, capable peers 2
+0 network entries and 0 paths using 0 bytes of memory
+BGP attribute entries [0/0], BGP AS path entries [0/0]
+BGP community entries [0/0], BGP clusterlist entries [0/0]
+
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+192.168.1.1     4 64520      20      20        4    0    0 00:11:32 0         
+192.168.1.2     4 64520      20      20        4    0    0 00:11:15 0         
+Leaf-4(config-if)# 
+Leaf-4(config-if)# 
+```
 ## 5. AnyCast G/W
 ## 6. EVPN
 ## 7. VxLAN
