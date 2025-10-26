@@ -231,6 +231,13 @@ int loo0
 int e1/1-4
  ip pim sparse-mode
  exit
+
+ip pim rp-address 1.2.3.4 group-list 224.0.0.0/4 
+ip pim ssm range 232.0.0.0/8
+ ! anycast RP for redundancy purposes 
+ip pim anycast-rp 1.2.3.4 192.168.1.1
+ip pim anycast-rp 1.2.3.4 192.168.1.2
+
 ```
 ##### Spine-2
 ```python
@@ -248,6 +255,12 @@ int loo0
 int e1/1-4
  ip pim sparse-mode
  exit
+
+ip pim rp-address 1.2.3.4 group-list 224.0.0.0/4 
+ip pim ssm range 232.0.0.0/8
+ ! anycast RP for redundancy purposes 
+ip pim anycast-rp 1.2.3.4 192.168.1.1
+ip pim anycast-rp 1.2.3.4 192.168.1.2
 ```
 ## 3. Overlay
 ## 4. VLANs & VNIs
