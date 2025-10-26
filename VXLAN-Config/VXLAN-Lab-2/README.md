@@ -214,7 +214,39 @@ Leaf-4(config)# show ip ospf neig
  1.1.1.1           1 FULL/ -          00:00:44 192.168.1.1     Eth1/2 
 Leaf-4(config)# 
 ```
-## 2. Underlay
+## 2. Step 3. Multicast Configuration (PIM)
+##### Spine-1
+```python
+feature pim
+int loopback 1
+ ip address 1.2.3.4/32 ! # Same IP you need to configure on both the Spine 
+ no shut
+ ip router ospf UNDERLAY area 0.0.0.0
+ ip pim sparse-mode 
+ 
+int loo0
+ ip pim sparse-mode
+ exit
+int e1/1-4
+ ip pim sparse-mode
+ exit
+```
+##### Spine-2
+```python
+feature pim
+int loopback 1
+ ip address 1.2.3.4/32 ! # Same IP you need to configure on both the Spine 
+ no shut
+ ip router ospf UNDERLAY area 0.0.0.0
+ ip pim sparse-mode 
+ 
+int loo0
+ ip pim sparse-mode
+ exit
+int e1/1-4
+ ip pim sparse-mode
+ exit
+```
 ## 3. Overlay
 ## 4. VLANs & VNIs
 ## 5. AnyCast G/W
