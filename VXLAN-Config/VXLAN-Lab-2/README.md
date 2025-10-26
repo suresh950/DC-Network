@@ -744,7 +744,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 
 SPine-1(config-if)# 
 SPine-1(config-if)#
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Spine-2(config-if)# show ip bgp summary 
 BGP summary information for VRF default, address family IPv4 Unicast
 BGP router identifier 2.2.2.2, local AS number 64520
@@ -759,7 +759,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 192.168.1.5     4 64520      23      23        6    0    0 00:14:13 0         
 192.168.1.6     4 64520      23      23        6    0    0 00:14:02 0         
 Spine-2(config-if)# 
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Leaf-1(config-if)# show ip bgp summary
 BGP summary information for VRF default, address family IPv4 Unicast
 BGP router identifier 3.3.3.3, local AS number 64520
@@ -773,7 +773,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 192.168.1.2     4 64520      20      20        4    0    0 00:11:24 0         
 Leaf-1(config-if)# 
 Leaf-1(config-if)#
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Leaf-2(config-if)# show ip bgp summary
 BGP summary information for VRF default, address family IPv4 Unicast
 BGP router identifier 4.4.4.4, local AS number 64520
@@ -787,7 +787,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 192.168.1.2     4 64520      19      19        4    0    0 00:10:39 0         
 Leaf-2(config-if)# 
 Leaf-2(config-if)#
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Leaf-3(config-if)# 
 Leaf-3(config-if)# show ip bgp summary
 BGP summary information for VRF default, address family IPv4 Unicast
@@ -802,7 +802,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 192.168.1.2     4 64520      20      20        4    0    0 00:11:26 0         
 Leaf-3(config-if)# 
 Leaf-3(config-if)#
-
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Leaf-4(config-if)# show ip bgp summary
 BGP summary information for VRF default, address family IPv4 Unicast
 BGP router identifier 6.6.6.6, local AS number 64520
