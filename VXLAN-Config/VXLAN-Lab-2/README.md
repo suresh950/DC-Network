@@ -893,7 +893,141 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 192.168.1.2     4 64520      26      26        4    0    0 00:17:23 0         
 Leaf-4(config-if)# 
 ```
-## 5. AnyCast G/W
-## 6. EVPN
-## 7. VxLAN
+## 5. VLAN/VNI/NVE Configuration on Leafs
+##### Same Configuration on all the Leafs (Leaf-1, Leaf2, Leaf3, Leaf4))
+```Python
+! # Provide some memory on TCAM
+hardware access-list tcam region racl 512
+hardware access-list tcam region arp-ether 256 double-wide
+! # Configure MAC to be used by Gateways
+fabric forwarding anycast-gateway-mac 0000.0011.1234
+vlan 10
+ vn-segment 100010
+int vlan 10
+ ip address 10.10.10.254/24
+ no shut
+ fabric forwarding mode anycast-gateway
+vlan 20
+ vn-segment 100020
+int vlan 20
+ ip address 10.10.20.254/24
+ no shut
+ fabric forwarding mode anycast-gateway
+vlan 30
+ vn-segment 100030
+int vlan 30
+ ip address 10.10.30.254/24
+ no shut
+ fabric forwarding mode anycast-gateway
+```
+## 6. Configure the VTEP interface 
+##### Same Configuration on all the Leafs (Leaf-1, Leaf2, Leaf3, Leaf4))
+```Python
+
+int nve 1
+no shutdown
+ host-reachability protocol bgp 
+ source-interface loopback 0
+ member vni 100010
+  suppress-arp 
+  mcast-group 224.1.1.192
+ member vni 100020
+  suppress-arp 
+  mcast-group 224.1.1.192
+ member vni 100030
+  suppress-arp 
+  mcast-group 224.1.1.192
+
+evpn 
+ vni 100010 l2 
+  rd auto 
+  route-target import auto 
+  route-target export auto
+ vni 100020 l2 
+  rd auto 
+  route-target import auto 
+  route-target export auto
+ vni 100030 l2 
+  rd auto 
+  route-target import auto 
+  route-target export auto 
+
+```
+## 7. Configure the interface in vlan 10, vlan 20, and vlan 30 for all the Leafs
+```Python
+interface e1/5
+ switchport
+ switchport mode access
+ switchport access vlan 10
+interface e1/6
+ switchport
+ switchport mode access
+ switchport access vlan 20
+interface e1/7
+ switchport
+ switchport mode access
+ switchport access vlan 30
+```
 ## 8. Validation
+
+```python
+! Now all the VLANs will be able to communicate with in self vlan across the Leafs
+! Till now, we have not established the inter-VLAN communication 
+````
+## 9. Configuration for inter-VLAN communication 
+#### Create L3 VNI
+```python
+Vlan 999
+ vn-segment 100999
+ exit
+````
+#### Create L3 VRF
+```python
+vrf context T1
+ vni 100999
+ rd auto 
+  address-family ipv4 unicast 
+  route-target both auto 
+  route-target both auto evpn 
+ exit
+````
+#### Create L3 interface for Vlan 999
+```python
+interface vlan 999
+ vrf member T1
+ ip forward
+ no shut
+````
+#### Associate the New vni to nve 1
+```python
+interface nve 1
+   member vni 100999 associate-vrf 
+````
+#### Configure BGP for VRF T1
+```python
+router bgp 64520
+  vrf T1
+  log-neighbor-changes 
+  address-family ipv4 unicast 
+    network 10.10.10.0/24
+    network 10.10.20.0/24
+    network 10.10.30.0/24
+````
+#### Associate all the vlan interfaces to the VRF
+```python
+int vlan 10
+ vrf member T1
+ ip address 10.10.10.254/24
+ fabric forwarding mode anycast-gateway 
+ no shut
+int vlan 20
+ vrf member T1
+ ip address 10.10.20.254/24
+ fabric forwarding mode anycast-gateway 
+ no shut 
+int vlan 30
+ vrf member T1
+ ip address 10.10.30.254/24
+ fabric forwarding mode anycast-gateway 
+ no shut
+````
