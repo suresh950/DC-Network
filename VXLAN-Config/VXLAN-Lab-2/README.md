@@ -1031,3 +1031,50 @@ int vlan 30
  fabric forwarding mode anycast-gateway 
  no shut
 ````
+## Final Verification 
+```python
+Leaf-4# show nve vni
+Codes: CP - Control Plane        DP - Data Plane          
+       UC - Unconfigured         SA - Suppress ARP        
+       SU - Suppress Unknown Unicast 
+       Xconn - Crossconnect      
+       MS-IR - Multisite Ingress Replication
+ 
+Interface VNI      Multicast-group   State Mode Type [BD/VRF]      Flags
+--------- -------- ----------------- ----- ---- ------------------ -----
+nve1      100010   224.1.1.192       Up    CP   L2 [10]            SA   
+nve1      100020   224.1.1.192       Up    CP   L2 [20]            SA   
+nve1      100030   224.1.1.192       Up    CP   L2 [30]            SA   
+nve1      100999   n/a               Up    CP   L3 [T1]                 
+
+Leaf-4#
+Leaf-4# show vxlan 
+Vlan            VN-Segment
+====            ==========
+10              100010
+20              100020
+30              100030
+999             100999
+Leaf-4#
+Leaf-4# show nve peers
+Interface Peer-IP                                 State LearnType Uptime   Route
+r-Mac       
+--------- --------------------------------------  ----- --------- -------- -----
+------------
+nve1      192.168.1.3                             Up    CP        00:37:51 5001.
+3b00.1b08   
+nve1      192.168.1.4                             Up    CP        00:34:33 5001.
+3c00.1b08   
+nve1      192.168.1.5                             Up    CP        00:37:56 5001.
+4100.1b08   
+
+Leaf-4#
+Leaf-4# show nve interface
+Interface: nve1, State: Up, encapsulation: VXLAN
+ VPC Capability: VPC-VIP-Only [not-notified]
+ Local Router MAC: 5001.5000.1b08
+ Host Learning Mode: Control-Plane
+ Source-Interface: loopback0 (primary: 192.168.1.6, secondary: 0.0.0.0)
+
+Leaf-4#
+```
