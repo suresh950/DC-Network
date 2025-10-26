@@ -157,6 +157,63 @@ interface e1/1-2
  ip router ospf UNDERLAY area 0.0.0.0
  exit
 ```
+
+## Step 2. Underlay OSPF Verification
+##### All the switches
+```python
+SPine-1(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 4
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 3.3.3.3           1 FULL/ -          00:01:07 192.168.1.3     Eth1/1 
+ 4.4.4.4           1 FULL/ -          00:00:58 192.168.1.4     Eth1/2 
+ 5.5.5.5           1 FULL/ -          00:00:50 192.168.1.5     Eth1/3 
+ 6.6.6.6           1 FULL/ -          00:00:44 192.168.1.6     Eth1/4 
+SPine-1(config)#
+
+Spine-2(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 4
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 4.4.4.4           1 FULL/ -          00:00:57 192.168.1.4     Eth1/1 
+ 3.3.3.3           1 FULL/ -          00:01:04 192.168.1.3     Eth1/2 
+ 5.5.5.5           1 FULL/ -          00:00:53 192.168.1.5     Eth1/3 
+ 6.6.6.6           1 FULL/ -          00:00:42 192.168.1.6     Eth1/4 
+Spine-2(config)#
+
+Leaf-1(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 2
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 1.1.1.1           1 FULL/ -          00:01:07 192.168.1.1     Eth1/1 
+ 2.2.2.2           1 FULL/ -          00:01:04 192.168.1.2     Eth1/2 
+Leaf-1(config)#
+
+Leaf-2(config)# 
+Leaf-2(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 2
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 2.2.2.2           1 FULL/ -          00:00:57 192.168.1.2     Eth1/1 
+ 1.1.1.1           1 FULL/ -          00:00:58 192.168.1.1     Eth1/2 
+Leaf-2(config)#
+
+Leaf-3(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 2
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 1.1.1.1           1 FULL/ -          00:00:50 192.168.1.1     Eth1/1 
+ 2.2.2.2           1 FULL/ -          00:00:53 192.168.1.2     Eth1/2 
+Leaf-3(config)#
+
+Leaf-4(config)# show ip ospf neig
+ OSPF Process ID UNDERLAY VRF default
+ Total number of neighbors: 2
+ Neighbor ID     Pri State            Up Time  Address         Interface
+ 2.2.2.2           1 FULL/ -          00:00:42 192.168.1.2     Eth1/1 
+ 1.1.1.1           1 FULL/ -          00:00:44 192.168.1.1     Eth1/2 
+Leaf-4(config)# 
+```
 ## 2. Underlay
 ## 3. Overlay
 ## 4. VLANs & VNIs
