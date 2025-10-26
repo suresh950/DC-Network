@@ -91,6 +91,9 @@ interface e1/1-4
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
+
 ```
 ##### Spine-2
 ```python
@@ -104,6 +107,8 @@ interface e1/1-4
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
 ```
 ##### Leaf-1
 ```python
@@ -117,6 +122,8 @@ interface e1/1-2
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
 ```
 ##### Leaf-2
 ```python
@@ -130,6 +137,8 @@ interface e1/1-2
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
 ```
 ##### Leaf-3
 ```python
@@ -143,6 +152,8 @@ interface e1/1-2
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
 ```
 ##### Leaf-4
 ```python
@@ -156,6 +167,8 @@ interface e1/1-2
  ip unnumbered loopback 0
  ip router ospf UNDERLAY area 0.0.0.0
  exit
+interface loopback0
+ ip router ospf UNDERLAY area 0.0.0.0
 ```
 
 ## 2 Step 2. Underlay OSPF Verification
