@@ -158,7 +158,7 @@ interface e1/1-2
  exit
 ```
 
-## Step 2. Underlay OSPF Verification
+## 2 Step 2. Underlay OSPF Verification
 ##### All the switches
 ```python
 SPine-1(config)# show ip ospf neig
@@ -214,12 +214,13 @@ Leaf-4(config)# show ip ospf neig
  1.1.1.1           1 FULL/ -          00:00:44 192.168.1.1     Eth1/2 
 Leaf-4(config)# 
 ```
-## 2. Step 3. Multicast Configuration (PIM)
+## 3. Step 3. Multicast Configuration (PIM)
 ##### Spine-1
 ```python
 feature pim
 int loopback 1
- ip address 1.2.3.4/32 ! # Same IP you need to configure on both the Spine 
+  ! # Same IP you need to configure on both the Spine 
+ ip address 1.2.3.4/32
  no shut
  ip router ospf UNDERLAY area 0.0.0.0
  ip pim sparse-mode 
@@ -235,7 +236,8 @@ int e1/1-4
 ```python
 feature pim
 int loopback 1
- ip address 1.2.3.4/32 ! # Same IP you need to configure on both the Spine 
+  ! # Same IP you need to configure on both the Spine 
+ ip address 1.2.3.4/32
  no shut
  ip router ospf UNDERLAY area 0.0.0.0
  ip pim sparse-mode 
