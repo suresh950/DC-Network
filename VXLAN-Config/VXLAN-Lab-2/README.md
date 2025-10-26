@@ -77,6 +77,86 @@ int loopback 0
  no shut
  exit
 ```
+#### Configure OSPF On all Switch Spine and Leaf
+
+##### Spine-1
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 1.1.1.1
+ log-adjacency-changes 
+ exit
+interface e1/1-4
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
+##### Spine-2
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 2.2.2.2
+ log-adjacency-changes 
+ exit
+interface e1/1-4
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
+##### Leaf-1
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 3.3.3.3
+ log-adjacency-changes 
+ exit
+interface e1/1-2
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
+##### Leaf-2
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 4.4.4.4
+ log-adjacency-changes 
+ exit
+interface e1/1-2
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
+##### Leaf-3
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 5.5.5.5
+ log-adjacency-changes 
+ exit
+interface e1/1-2
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
+##### Leaf-4
+```python
+feature ospf
+router ospf UNDERLAY
+ router-id 6.6.6.6
+ log-adjacency-changes 
+ exit
+interface e1/1-2
+ medium p2p 
+ ip unnumbered loopback 0
+ ip router ospf UNDERLAY area 0.0.0.0
+ exit
+```
 ## 2. Underlay
 ## 3. Overlay
 ## 4. VLANs & VNIs
