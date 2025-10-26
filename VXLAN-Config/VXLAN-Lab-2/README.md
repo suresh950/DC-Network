@@ -2,7 +2,7 @@
 ![](https://github.com/suresh950/DC-Network/blob/main/VXLAN-Config/VXLAN-Lab-2/Image/2025-10-26_11h00_55.png "LAB")
 
 # Steps
-## 1. Overlay Configuration
+## 1. Step 1. Overlay Configuration
 
 ```python
 
