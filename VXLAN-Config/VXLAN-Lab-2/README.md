@@ -275,8 +275,209 @@ int e1/1-2
  ip pim sparse-mode 
 
 ```
+## (Quick Checks)
+```python
+SPine-1(config)# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.3     Ethernet1/1          00:04:58  00:01:36  1        yes     n/a   
+  no
+192.168.1.4     Ethernet1/2          00:01:32  00:01:41  1        yes     n/a   
+  no
+192.168.1.5     Ethernet1/3          00:01:26  00:01:18  1        yes     n/a   
+  no
+192.168.1.6     Ethernet1/4          00:01:24  00:01:21  1        yes     n/a   
+  no
+SPine-1(config)#
+SPine-1(config)#     show ip pim rp
+PIM RP Status Information for VRF "default"
+BSR disabled
+Auto-RP disabled
+BSR RP Candidate policy: None
+BSR RP policy: None
+Auto-RP Announce policy: None
+Auto-RP Discovery policy: None
+
+Anycast-RP 1.2.3.4 members:
+  192.168.1.1*  192.168.1.2  
+
+RP: 1.2.3.4*, (0), 
+ uptime: 00:10:37   priority: 255, 
+ RP-source: (local),  
+ group ranges:
+ 224.0.0.0/4   
+SPine-1(config)# 
+SPine-1(config)# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:24, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
 
 
+SPine-1(config)# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+SPine-1(config)# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+SPine-1(config)#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Spine-2(config)# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.4     Ethernet1/1          00:01:32  00:01:41  1        yes     n/a   
+  no
+192.168.1.3     Ethernet1/2          00:04:58  00:01:36  1        yes     n/a   
+  no
+192.168.1.5     Ethernet1/3          00:01:26  00:01:20  1        yes     n/a   
+  no
+192.168.1.6     Ethernet1/4          00:01:24  00:01:20  1        yes     n/a   
+  no
+Spine-2(config)#
+
+Spine-2(config)# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:26, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
+
+
+Spine-2(config)# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+Spine-2(config)# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+Spine-2(config)#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Leaf-1(config)# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.1     Ethernet1/1          00:04:58  00:01:39  1        yes     n/a   
+  no
+192.168.1.2     Ethernet1/2          00:04:58  00:01:40  1        yes     n/a   
+  no
+Leaf-1(config)#
+Leaf-1(config)# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:25, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
+
+
+Leaf-1(config)# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+Leaf-1(config)# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+Leaf-1(config)#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Leaf-2(config-if-range)# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.2     Ethernet1/1          00:01:32  00:01:41  1        yes     n/a   
+  no
+192.168.1.1     Ethernet1/2          00:01:32  00:01:36  1        yes     n/a   
+  no
+Leaf-2(config-if-range)#
+Leaf-2(config-if-range)# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:25, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
+
+
+Leaf-2(config-if-range)# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+Leaf-2(config-if-range)# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+Leaf-2(config-if-range)#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Leaf-3(config-if-range)# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.1     Ethernet1/1          00:01:26  00:01:29  1        yes     n/a   
+  no
+192.168.1.2     Ethernet1/2          00:01:26  00:01:32  1        yes     n/a   
+  no
+Leaf-3(config-if-range)#
+Leaf-3(config-if-range)# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:26, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
+
+
+Leaf-3(config-if-range)# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+Leaf-3(config-if-range)# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+Leaf-3(config-if-range)#
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Leaf-4# show ip pim neighbor
+PIM Neighbor Status for VRF "default"
+Neighbor        Interface            Uptime    Expires   DR       Bidir-  BFD   
+ ECMP Redirect
+                                                         Priority Capable State 
+    Capable
+192.168.1.2     Ethernet1/1          00:01:24  00:01:21  1        yes     n/a   
+  no
+192.168.1.1     Ethernet1/2          00:01:24  00:01:42  1        yes     n/a   
+  no
+Leaf-4#
+Leaf-4# show ip mroute
+IP Multicast Routing Table for VRF "default"
+
+(*, 232.0.0.0/8), uptime: 00:21:26, pim ip 
+  Incoming interface: Null, RPF nbr: 0.0.0.0
+  Outgoing interface list: (count: 0)
+
+
+Leaf-4# show ip igmp snooping groups
+Type: S - Static, D - Dynamic, R - Router port, F - Fabricpath core port
+
+Vlan  Group Address      Ver  Type  Port list
+Leaf-4# show forwarding distribution multicast
+Number of Multicast FIB Processes Active: 1
+Slot     FIB State 
+   1        ACTIVE 
+Leaf-4#
+```
 ## 3. Overlay
 ## 4. VLANs & VNIs
 ## 5. AnyCast G/W
